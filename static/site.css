@@ -1,0 +1,35 @@
+body {
+  font-family:"Sabon LT Std","Hoefler Text","Palatino Linotype","Book Antiqua",serif;
+}
+div.title-container {
+  width:90%;
+  margin:10px 10px 10px 10px;
+}
+div.title {
+  font-size:30px;
+}
+div.author {
+  text-align:right;
+}
+
+/*div.body-container {
+  margin: 0 30px;
+  width:100%;
+}
+div.post-spacer {
+  width:10%;
+  float:left;
+}
+div.index-post-container {
+  float:left;
+  width:80%;
+}
+div.index-post-title {
+  font-size:20px;
+}
+div.index-post-author {
+  
+}
+div.index-post-body {
+  
+}*/
