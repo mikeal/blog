@@ -17,11 +17,12 @@ h1,h2,h3,h4,h5 {
 }
 div.title-container {
   width:90%;
-  margin:15px 15px 15px 15px;
+  margin:15px 15px 10px 25px;
   color:#FCFBEA;
 }
 div.title {
-  font-size:30px;
+  font-size:40px;
+  font-family:"Palatino Linotype","Book Antiqua",serif;
 }
 div.author {
   text-align:right;
