@@ -1,35 +1,67 @@
 body {
   font-family:"Sabon LT Std","Hoefler Text","Palatino Linotype","Book Antiqua",serif;
+  background-color:#2F73A5;
+}
+a {
+  color:#333333;
+  text-decoration:none;
+}
+a:hover {
+  color:#850844;
+}
+h1,h2,h3,h4,h5 {
+  font-family:"Sabon LT Std","Book Antiqua";
 }
 div.title-container {
   width:90%;
-  margin:10px 10px 10px 10px;
+  margin:15px 15px 15px 15px;
+  color:#FCFBEA;
 }
 div.title {
   font-size:30px;
 }
 div.author {
   text-align:right;
-}
-
-/*div.body-container {
-  margin: 0 30px;
-  width:100%;
-}
-div.post-spacer {
-  width:10%;
-  float:left;
-}
-div.index-post-container {
-  float:left;
-  width:80%;
-}
-div.index-post-title {
   font-size:20px;
 }
-div.index-post-author {
-  
+div.blog-post-title {
+  font-size:30px;
+  text-align:center;
 }
-div.index-post-body {
-  
-}*/
+div.container {
+  width:100%;
+}
+div.blog-post-dt {
+  text-align:right;
+}
+div.index-content-container {
+  float:left;
+  margin-right:10px;
+  margin-left:10px;
+  width:80%
+}
+div.wildcard-content-container {
+  float:left;
+  margin-right:10px;
+  margin-left:10px;
+  width:60%
+}
+div.left-nav {
+  float:left;
+  width:10%;
+  background-color:#F7FDFA;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 5px solid #F3F1EC;
+}
+div.blog-post-container {
+  margin-right:5px;
+  margin-bottom:5px;
+  background-color:#F7FDFA;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 5px solid #F3F1EC;
+}
+div.blog-container {
+  margin: 15px 15px 15px 15px;
+}

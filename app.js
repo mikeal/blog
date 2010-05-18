@@ -24,7 +24,9 @@ ddoc.rewrites = [
   
   // This is where I should add reverse compat with an old wordpress blog
   
-  {from:'/*', to:'_show/wildcard/*'},
+  {from:'/:k', to:'_list/wildcard/wildcard',
+   query:{startkey:[':k'], endkey:[':k', {}], include_docs:true}, 
+  },
   
 ]
 
@@ -33,17 +35,40 @@ ddoc.views.posts = {map: function (doc) {
     emit(doc.timestamp, 1);
   }
 }}
+ddoc.views.wildcard = {map: function (doc) {
+  if (doc.type === 'blog-post') {
+    emit([doc._id], 1);
+    emit([doc.title.replace(/[^a-zA-Z 0-9]+/g,'').replace(/ /g, '_').toLowerCase()], 1);
+  }
+}}
 
+ddoc.lists.wildcard = function (head, req) {
+  var mustache = require('modules/mustache');
+  start({"code": 200, "headers": {"content-type":"text/html"}})
+  var row = getRow();
+  send(mustache.to_html(this.templates['header.mustache'], this.blogconfig))  
+  row.doc.linkTitle = row.doc.title.replace(/[^a-zA-Z 0-9]+/g,'').replace(/ /g, '_').toLowerCase();
+  send('<div class="wildcard-content-container">')
+  send(mustache.to_html(this.templates['blogpost.mustache'], row.doc));
+  while(row = getRow()) {
+    send(mustache.to_html(this.templates['blogpost.mustache'], row.doc));
+  }
+  send('</div>')
+  send(mustache.to_html(this.templates['wildcardfooter.mustache'], this.blogconfig))
+}
 
 ddoc.lists.index = function (head, req) {
   var row;
   var mustache = require('modules/mustache');
   start({"code": 200, "headers": {"content-type":"text/html"}})
   send(mustache.to_html(this.templates['header.mustache'], this.blogconfig))  
+  send('<div class="index-content-container">')
   while(row = getRow()) {
-    send(mustache.to_html(this.templates['index.mustache'], row.doc));
+    row.doc.linkTitle = row.doc.title.replace(/[^a-zA-Z 0-9]+/g,'').replace(/ /g, '_').toLowerCase();
+    send(mustache.to_html(this.templates['blogpost.mustache'], row.doc));
   }
-  send(mustache.to_html(this.templates['header.mustache'], this.blogconfig))
+  send('</div>')
+  send(mustache.to_html(this.templates['footer.mustache'], this.blogconfig))
 }
 
 exports.app = ddoc;

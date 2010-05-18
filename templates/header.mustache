@@ -5,10 +5,18 @@
     <meta name="keywords" content="{{meta}}" />
     <meta name="author" content="{{author}}" />
     <link href="/static/site.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="/static/jquery.js" ></script>
+    <script language="javascript" type="text/javascript" src="/static/prettydate.js" ></script>
   <head>
   <body>
     <div id="title-container" class="title-container">
       <div id="title" class="title">{{title}}</div>
       <div id="author" class="author">{{author}}</div>
     </div>
-    <div id="body-container">
+    <script type="text/javascript">
+      $(document).ready(function () {
+        console.log($('div.blog-post-dt'))
+        $('div.blog-post-dt').prettyDate();
+      })
+    </script>
+    <div id="body-container" class="body-container">
