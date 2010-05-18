@@ -25,7 +25,7 @@ ddoc.rewrites = [
   // This is where I should add reverse compat with an old wordpress blog
   
   {from:'/:k', to:'_list/wildcard/wildcard',
-   query:{startkey:[':k'], endkey:[':k', {}], include_docs:true}, 
+   query:{startkey:[':k', {}], endkey:[':k', null], descending:true, include_docs:true}, 
   },
   
 ]
@@ -37,8 +37,11 @@ ddoc.views.posts = {map: function (doc) {
 }}
 ddoc.views.wildcard = {map: function (doc) {
   if (doc.type === 'blog-post') {
-    emit([doc._id], 1);
-    emit([doc.title.replace(/[^a-zA-Z 0-9]+/g,'').replace(/ /g, '_').toLowerCase()], 1);
+    emit([doc._id, "Z"], 1);
+    emit([doc.title.replace(/[^a-zA-Z 0-9]+/g,'').replace(/ /g, '_').toLowerCase() ,"Z"], 1);
+  } else if (doc.type == 'blog-comment') {
+    emit([doc['blog-id'], doc.timestamp], 1);
+    // emit([doc['blog-title'].replace(/[^a-zA-Z 0-9]+/g,'').replace(/ /g, '_').toLowerCase() ,doc.timestamp], 1);
   }
 }}
 
@@ -51,7 +54,7 @@ ddoc.lists.wildcard = function (head, req) {
   send('<div class="wildcard-content-container">')
   send(mustache.to_html(this.templates['blogpost.mustache'], row.doc));
   while(row = getRow()) {
-    send(mustache.to_html(this.templates['blogpost.mustache'], row.doc));
+    // send(mustache.to_html(this.templates['blogcomment.mustache'], row.doc));
   }
   send('</div>')
   send(mustache.to_html(this.templates['wildcardfooter.mustache'], this.blogconfig))
